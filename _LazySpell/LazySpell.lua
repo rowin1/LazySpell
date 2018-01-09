@@ -14,7 +14,7 @@ LazySpell.BOL = {
 LazySpell.LOCRANK = {
 ["enUS"] = "Rank",
 ["deDE"] = "Rang",
-["frFR"] = "Rang",
+["frFR"] = "Rang"
 }
 
 function LazySpell:Debug(msg)
@@ -202,7 +202,7 @@ function LazySpell:CalculateRank(spell, unit)
 	end	
 
 	self.cast.spell = spell
-	self.cast.msg = spell...."("..LazySpell.LOCRANK[GetLocale()].." "..result..") - "..GetUnitName(unit).." - Heal: "..heal.." - Deficit: "..healneed, spell
+	self.cast.msg = spell.."("..LazySpell.LOCRANK[GetLocale()].." "..result..") - "..GetUnitName(unit).." - Heal: "..heal.." - Deficit: "..healneed, spell
 	
 	return result
 end
@@ -213,7 +213,7 @@ function LazySpell:Clique_CastSpell(spell, unit)
 	if s and HealComm.Spells[s] and r == 1 then
 		local rank = LazySpell:CalculateRank(s, unit)
 		spell = s.."("..LazySpell.LOCRANK[GetLocale()].." "..rank..")"
-			
+		
 	end	
 	Clique:CastSpell_OLD(spell, unit)
 end
