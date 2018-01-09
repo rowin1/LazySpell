@@ -7,8 +7,14 @@ LazySpell.cast = {}
 
 LazySpell.BOL = {
 ["enUS"] = "Receives up to (%d+) extra healing from Holy Light spells%, and up to (%d+) extra healing from Flash of Light spells%.",
-["deDE"] = "Erh‰lt bis zu (%d+) extra Heilung durch %'Heiliges Licht%' und bis zu (%d+) extra Heilung durch den Zauber %'Lichtblitz%'%.",
-["frFR"] = "Les sorts de Lumiere sacrÈe rendent jusqu%'a (%d+) points de vie supplÈmentaires%, les sorts d%'Eclair lumineux jusqu%'a (%d+)%."
+["deDE"] = "Erh√§lt bis zu (%d+) extra Heilung durch %'Heiliges Licht%' und bis zu (%d+) extra Heilung durch den Zauber %'Lichtblitz%'%.",
+["frFR"] = "Les sorts de Lumiere sacr√©e rendent jusqu%'a (%d+) points de vie suppl√©mentaires%, les sorts d%'Eclair lumineux jusqu%'a (%d+)%."
+}
+
+LazySpell.LOCRANK = {
+["enUS"] = "Rank",
+["deDE"] = "Rang",
+["frFR"] = "Rang",
 }
 
 function LazySpell:Debug(msg)
@@ -196,7 +202,7 @@ function LazySpell:CalculateRank(spell, unit)
 	end	
 
 	self.cast.spell = spell
-	self.cast.msg = spell.."(Rank "..result..") - "..GetUnitName(unit).." - Heal: "..heal.." - Deficit: "..healneed, spell
+	self.cast.msg = spell...."("..LazySpell.LOCRANK[GetLocale()].." "..result..") - "..GetUnitName(unit).." - Heal: "..heal.." - Deficit: "..healneed, spell
 	
 	return result
 end
@@ -206,7 +212,8 @@ function LazySpell:Clique_CastSpell(spell, unit)
 	unit = unit or Clique.unit
 	if s and HealComm.Spells[s] and r == 1 then
 		local rank = LazySpell:CalculateRank(s, unit)
-		spell = s.."(Rank "..rank..")"
+		spell = s.."("..LazySpell.LOCRANK[GetLocale()].." "..rank..")"
+	DEFAULT_CHAT_FRAME:AddMessage(spell);
 		
 	end	
 	Clique:CastSpell_OLD(spell, unit)
@@ -216,9 +223,7 @@ function LazySpell:CM_CastSpell(spell, unit)
 	local s,r = LazySpell:ExtractSpell(spell)
 	if s and HealComm.Spells[s] and r == 1 then
 		local rank = LazySpell:CalculateRank(s, unit)
-		spell = s.."(Rank "..rank..")"
+		spell = s.."("..LazySpell.LOCRANK[GetLocale()].." "..rank..")"
 	end	
 	CM:CastSpell_OLD(spell, unit)
 end
-
-
