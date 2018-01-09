@@ -213,8 +213,7 @@ function LazySpell:Clique_CastSpell(spell, unit)
 	if s and HealComm.Spells[s] and r == 1 then
 		local rank = LazySpell:CalculateRank(s, unit)
 		spell = s.."("..LazySpell.LOCRANK[GetLocale()].." "..rank..")"
-	DEFAULT_CHAT_FRAME:AddMessage(spell);
-		
+			
 	end	
 	Clique:CastSpell_OLD(spell, unit)
 end
